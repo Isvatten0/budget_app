@@ -46,6 +46,12 @@ const Dashboard: React.FC = () => {
   }, [user])
 
   const loadUserData = async () => {
+    if (!user?.id) {
+      setError('User not authenticated')
+      setLoading(false)
+      return
+    }
+
     try {
       setLoading(true)
       setError('')
@@ -121,11 +127,16 @@ const Dashboard: React.FC = () => {
   }, [currentBalance, income, expenses, goals, settings])
 
   const updateBankBalance = async (newBalance: number) => {
+    if (!user?.id) {
+      setError('User not authenticated')
+      return
+    }
+
     try {
       const { error } = await supabase
         .from('bank_balances')
         .insert({
-          user_id: user!.id,
+          user_id: user.id,
           amount: newBalance
         })
 

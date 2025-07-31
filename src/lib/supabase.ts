@@ -69,6 +69,7 @@ export interface UserSettings {
   last_pay_date: string
   default_currency: string
   theme: 'dark' | 'light'
+  custom_days?: number
   created_at: string
   updated_at: string
 }
