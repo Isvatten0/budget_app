@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { LogOut, Settings, PiggyBank, TrendingUp, Calendar, Target, X, DollarSign } from 'lucide-react'
+import { LogOut, Settings, PiggyBank, TrendingUp, Calendar, Target, X, DollarSign, Trophy, CreditCard } from 'lucide-react'
 import FloatingDecorations from './ui/FloatingDecorations'
 import SettingsModal from './SettingsModal'
 
@@ -30,6 +30,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     if (path === '/income') return 'income'
     if (path === '/bills') return 'bills'
     if (path === '/goals') return 'goals'
+    if (path === '/achievements') return 'achievements'
+    if (path === '/credit-cards') return 'credit-cards'
     return 'dashboard'
   }
 
@@ -84,6 +86,24 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               >
                 <Target className="w-4 h-4 mr-2" />
                 Goals
+              </button>
+              <button 
+                onClick={() => handleTabClick('achievements')}
+                className={`pixel-button-secondary px-3 py-2 text-sm transition-all ${
+                  getActiveTab() === 'achievements' ? 'bg-rose-pine-pine text-rose-pine-text' : ''
+                }`}
+              >
+                <Trophy className="w-4 h-4 mr-2" />
+                Achievements
+              </button>
+              <button 
+                onClick={() => handleTabClick('credit-cards')}
+                className={`pixel-button-secondary px-3 py-2 text-sm transition-all ${
+                  getActiveTab() === 'credit-cards' ? 'bg-rose-pine-pine text-rose-pine-text' : ''
+                }`}
+              >
+                <CreditCard className="w-4 h-4 mr-2" />
+                Credit Cards
               </button>
             </nav>
 

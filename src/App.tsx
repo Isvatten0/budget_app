@@ -8,6 +8,8 @@ import Dashboard from './components/Dashboard'
 import IncomePage from './components/IncomePage'
 import BillsPage from './components/BillsPage'
 import GoalsPage from './components/GoalsPage'
+import AchievementsPage from './components/AchievementsPage'
+import CreditCardsPage from './components/CreditCardsPage'
 import Layout from './components/Layout'
 import LoadingSpinner from './components/ui/LoadingSpinner'
 
@@ -78,6 +80,20 @@ function AppRoutes() {
           <PrivateRoute>
             <Layout>
               <GoalsPage />
+            </Layout>
+          </PrivateRoute>
+        } />
+        <Route path="/achievements" element={
+          <PrivateRoute>
+            <Layout>
+              <AchievementsPage />
+            </Layout>
+          </PrivateRoute>
+        } />
+        <Route path="/credit-cards" element={
+          <PrivateRoute>
+            <Layout>
+              <CreditCardsPage />
             </Layout>
           </PrivateRoute>
         } />
