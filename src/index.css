@@ -76,31 +76,31 @@
     transition: background-color 0.3s ease, color 0.3s ease;
     background-image: 
       /* White stars - various sizes and shapes */
-      radial-gradient(3px 3px at 50px 50px, rgba(255,255,255,0.8), transparent),
-      radial-gradient(2px 2px at 150px 100px, rgba(255,255,255,0.6), transparent),
-      radial-gradient(1px 1px at 250px 30px, rgba(255,255,255,0.7), transparent),
-      radial-gradient(2px 2px at 350px 120px, rgba(255,255,255,0.5), transparent),
-      radial-gradient(1px 1px at 450px 60px, rgba(255,255,255,0.6), transparent),
+      radial-gradient(4px 4px at 50px 50px, rgba(255,255,255,0.9), transparent),
+      radial-gradient(3px 3px at 150px 100px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(2px 2px at 250px 30px, rgba(255,255,255,0.9), transparent),
+      radial-gradient(3px 3px at 350px 120px, rgba(255,255,255,0.7), transparent),
+      radial-gradient(2px 2px at 450px 60px, rgba(255,255,255,0.8), transparent),
       /* Red stars */
-      radial-gradient(2px 2px at 80px 80px, rgba(235,111,146,0.6), transparent),
-      radial-gradient(1px 1px at 180px 150px, rgba(235,111,146,0.5), transparent),
-      radial-gradient(1px 1px at 280px 90px, rgba(235,111,146,0.4), transparent),
+      radial-gradient(3px 3px at 80px 80px, rgba(235,111,146,0.8), transparent),
+      radial-gradient(2px 2px at 180px 150px, rgba(235,111,146,0.7), transparent),
+      radial-gradient(2px 2px at 280px 90px, rgba(235,111,146,0.6), transparent),
       /* Blue stars */
-      radial-gradient(2px 2px at 380px 180px, rgba(49,116,143,0.6), transparent),
-      radial-gradient(1px 1px at 480px 110px, rgba(49,116,143,0.5), transparent),
-      radial-gradient(1px 1px at 580px 200px, rgba(49,116,143,0.4), transparent),
+      radial-gradient(3px 3px at 380px 180px, rgba(49,116,143,0.8), transparent),
+      radial-gradient(2px 2px at 480px 110px, rgba(49,116,143,0.7), transparent),
+      radial-gradient(2px 2px at 580px 200px, rgba(49,116,143,0.6), transparent),
       /* Yellow/Gold stars */
-      radial-gradient(2px 2px at 120px 40px, rgba(246,193,119,0.7), transparent),
-      radial-gradient(1px 1px at 220px 170px, rgba(246,193,119,0.6), transparent),
-      radial-gradient(1px 1px at 320px 70px, rgba(246,193,119,0.5), transparent),
+      radial-gradient(3px 3px at 120px 40px, rgba(246,193,119,0.9), transparent),
+      radial-gradient(2px 2px at 220px 170px, rgba(246,193,119,0.8), transparent),
+      radial-gradient(2px 2px at 320px 70px, rgba(246,193,119,0.7), transparent),
       /* Purple stars */
-      radial-gradient(2px 2px at 420px 140px, rgba(196,167,231,0.6), transparent),
-      radial-gradient(1px 1px at 520px 90px, rgba(196,167,231,0.5), transparent),
+      radial-gradient(3px 3px at 420px 140px, rgba(196,167,231,0.8), transparent),
+      radial-gradient(2px 2px at 520px 90px, rgba(196,167,231,0.7), transparent),
       /* Diamond shapes (using rotated squares) */
-      linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.4) 50%, transparent 60%) 100px 50px / 4px 4px,
-      linear-gradient(45deg, transparent 40%, rgba(235,111,146,0.5) 50%, transparent 60%) 300px 150px / 3px 3px,
-      linear-gradient(45deg, transparent 40%, rgba(49,116,143,0.4) 50%, transparent 60%) 500px 80px / 2px 2px,
-      linear-gradient(45deg, transparent 40%, rgba(246,193,119,0.6) 50%, transparent 60%) 200px 180px / 3px 3px;
+      linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.6) 50%, transparent 60%) 100px 50px / 5px 5px,
+      linear-gradient(45deg, transparent 40%, rgba(235,111,146,0.7) 50%, transparent 60%) 300px 150px / 4px 4px,
+      linear-gradient(45deg, transparent 40%, rgba(49,116,143,0.6) 50%, transparent 60%) 500px 80px / 3px 3px,
+      linear-gradient(45deg, transparent 40%, rgba(246,193,119,0.8) 50%, transparent 60%) 200px 180px / 4px 4px;
     background-repeat: repeat;
     background-size: 600px 200px;
     animation: twinkle-1 4s ease-in-out infinite;
@@ -110,31 +110,31 @@
     @apply bg-rose-pine-dawn-base text-rose-pine-dawn-text;
     background-image: 
       /* Dark stars for light theme - various sizes and shapes */
-      radial-gradient(3px 3px at 50px 50px, rgba(87,82,121,0.8), transparent),
-      radial-gradient(2px 2px at 150px 100px, rgba(87,82,121,0.6), transparent),
-      radial-gradient(1px 1px at 250px 30px, rgba(87,82,121,0.7), transparent),
-      radial-gradient(2px 2px at 350px 120px, rgba(87,82,121,0.5), transparent),
-      radial-gradient(1px 1px at 450px 60px, rgba(87,82,121,0.6), transparent),
+      radial-gradient(4px 4px at 50px 50px, rgba(87,82,121,0.9), transparent),
+      radial-gradient(3px 3px at 150px 100px, rgba(87,82,121,0.8), transparent),
+      radial-gradient(2px 2px at 250px 30px, rgba(87,82,121,0.9), transparent),
+      radial-gradient(3px 3px at 350px 120px, rgba(87,82,121,0.7), transparent),
+      radial-gradient(2px 2px at 450px 60px, rgba(87,82,121,0.8), transparent),
       /* Red stars */
-      radial-gradient(2px 2px at 80px 80px, rgba(180,99,122,0.6), transparent),
-      radial-gradient(1px 1px at 180px 150px, rgba(180,99,122,0.5), transparent),
-      radial-gradient(1px 1px at 280px 90px, rgba(180,99,122,0.4), transparent),
+      radial-gradient(3px 3px at 80px 80px, rgba(180,99,122,0.8), transparent),
+      radial-gradient(2px 2px at 180px 150px, rgba(180,99,122,0.7), transparent),
+      radial-gradient(2px 2px at 280px 90px, rgba(180,99,122,0.6), transparent),
       /* Blue stars */
-      radial-gradient(2px 2px at 380px 180px, rgba(40,105,131,0.6), transparent),
-      radial-gradient(1px 1px at 480px 110px, rgba(40,105,131,0.5), transparent),
-      radial-gradient(1px 1px at 580px 200px, rgba(40,105,131,0.4), transparent),
+      radial-gradient(3px 3px at 380px 180px, rgba(40,105,131,0.8), transparent),
+      radial-gradient(2px 2px at 480px 110px, rgba(40,105,131,0.7), transparent),
+      radial-gradient(2px 2px at 580px 200px, rgba(40,105,131,0.6), transparent),
       /* Yellow/Gold stars */
-      radial-gradient(2px 2px at 120px 40px, rgba(234,157,52,0.7), transparent),
-      radial-gradient(1px 1px at 220px 170px, rgba(234,157,52,0.6), transparent),
-      radial-gradient(1px 1px at 320px 70px, rgba(234,157,52,0.5), transparent),
+      radial-gradient(3px 3px at 120px 40px, rgba(234,157,52,0.9), transparent),
+      radial-gradient(2px 2px at 220px 170px, rgba(234,157,52,0.8), transparent),
+      radial-gradient(2px 2px at 320px 70px, rgba(234,157,52,0.7), transparent),
       /* Purple stars */
-      radial-gradient(2px 2px at 420px 140px, rgba(144,122,169,0.6), transparent),
-      radial-gradient(1px 1px at 520px 90px, rgba(144,122,169,0.5), transparent),
+      radial-gradient(3px 3px at 420px 140px, rgba(144,122,169,0.8), transparent),
+      radial-gradient(2px 2px at 520px 90px, rgba(144,122,169,0.7), transparent),
       /* Diamond shapes (using rotated squares) */
-      linear-gradient(45deg, transparent 40%, rgba(87,82,121,0.4) 50%, transparent 60%) 100px 50px / 4px 4px,
-      linear-gradient(45deg, transparent 40%, rgba(180,99,122,0.5) 50%, transparent 60%) 300px 150px / 3px 3px,
-      linear-gradient(45deg, transparent 40%, rgba(40,105,131,0.4) 50%, transparent 60%) 500px 80px / 2px 2px,
-      linear-gradient(45deg, transparent 40%, rgba(234,157,52,0.6) 50%, transparent 60%) 200px 180px / 3px 3px;
+      linear-gradient(45deg, transparent 40%, rgba(87,82,121,0.6) 50%, transparent 60%) 100px 50px / 5px 5px,
+      linear-gradient(45deg, transparent 40%, rgba(180,99,122,0.7) 50%, transparent 60%) 300px 150px / 4px 4px,
+      linear-gradient(45deg, transparent 40%, rgba(40,105,131,0.6) 50%, transparent 60%) 500px 80px / 3px 3px,
+      linear-gradient(45deg, transparent 40%, rgba(234,157,52,0.8) 50%, transparent 60%) 200px 180px / 4px 4px;
     animation: twinkle-2 5s ease-in-out infinite;
   }
 
@@ -154,41 +154,13 @@
     @apply bg-rose-pine-surface border-2 border-rose-pine-overlay shadow-pixel rounded-none;
     @apply transition-all duration-200 hover:shadow-lg hover:border-rose-pine-subtle;
     @apply relative overflow-hidden;
-    background-image: 
-      linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.05) 50%, transparent 60%);
-    background-size: 200% 200%;
   }
 
-  .pixel-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      radial-gradient(1px 1px at 20px 20px, rgba(255,255,255,0.1), transparent),
-      radial-gradient(1px 1px at 40px 40px, rgba(255,255,255,0.05), transparent);
-    pointer-events: none;
-    z-index: 0;
-  }
 
-  .pixel-card > * {
-    position: relative;
-    z-index: 1;
-  }
 
   .light .pixel-card {
     @apply bg-rose-pine-dawn-surface border-rose-pine-dawn-overlay;
     @apply hover:border-rose-pine-dawn-subtle;
-    background-image: 
-      linear-gradient(45deg, transparent 40%, rgba(87,82,121,0.05) 50%, transparent 60%);
-  }
-
-  .light .pixel-card::before {
-    background: 
-      radial-gradient(1px 1px at 20px 20px, rgba(87,82,121,0.1), transparent),
-      radial-gradient(1px 1px at 40px 40px, rgba(87,82,121,0.05), transparent);
   }
 
   .pixel-button {
@@ -197,47 +169,15 @@
     @apply transition-all duration-200 hover:bg-rose-pine-iris hover:shadow-lg;
     @apply active:shadow-pixel-inset active:translate-y-0.5;
     @apply relative overflow-hidden font-pixel;
-    background-image: 
-      linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-    background-size: 200% 200%;
-    animation: sparkle 3s ease-in-out infinite;
   }
 
   .pixel-button:hover {
     animation: pixel-bounce 0.5s ease-in-out;
-    background-image: 
-      linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
-  }
-
-  .pixel-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s;
-  }
-
-  .pixel-button:hover::before {
-    left: 100%;
   }
 
   .light .pixel-button {
     @apply bg-rose-pine-dawn-pine text-rose-pine-dawn-text border-rose-pine-dawn-overlay;
     @apply hover:bg-rose-pine-dawn-iris;
-    background-image: 
-      linear-gradient(45deg, transparent 30%, rgba(87,82,121,0.1) 50%, transparent 70%);
-  }
-
-  .light .pixel-button:hover {
-    background-image: 
-      linear-gradient(45deg, transparent 30%, rgba(87,82,121,0.2) 50%, transparent 70%);
-  }
-
-  .light .pixel-button::before {
-    background: linear-gradient(90deg, transparent, rgba(87,82,121,0.2), transparent);
   }
 
   .pixel-button-secondary {
