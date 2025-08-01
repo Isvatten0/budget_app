@@ -5,6 +5,7 @@ import { ThemeProvider } from './contexts/ThemeContext'
 import Login from './components/auth/Login'
 import SignUp from './components/auth/SignUp'
 import Dashboard from './components/Dashboard'
+import IncomePage from './components/IncomePage'
 import BillsPage from './components/BillsPage'
 import GoalsPage from './components/GoalsPage'
 import Layout from './components/Layout'
@@ -56,6 +57,13 @@ function AppRoutes() {
           <PrivateRoute>
             <Layout>
               <Dashboard />
+            </Layout>
+          </PrivateRoute>
+        } />
+        <Route path="/income" element={
+          <PrivateRoute>
+            <Layout>
+              <IncomePage />
             </Layout>
           </PrivateRoute>
         } />

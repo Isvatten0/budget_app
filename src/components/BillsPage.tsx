@@ -19,7 +19,8 @@ const BillsPage: React.FC = () => {
     amount: '',
     frequency: 'monthly' as 'weekly' | 'biweekly' | 'monthly' | 'custom',
     due_date: '',
-    custom_days: '30'
+    custom_days: '30',
+    is_paid: false
   })
 
   useEffect(() => {
@@ -60,7 +61,8 @@ const BillsPage: React.FC = () => {
         amount: parseFloat(formData.amount),
         frequency: formData.frequency,
         due_date: formData.due_date,
-        custom_days: formData.frequency === 'custom' ? parseInt(formData.custom_days) : null
+        custom_days: formData.frequency === 'custom' ? parseInt(formData.custom_days) : null,
+        is_paid: formData.is_paid
       }
 
       if (editingBill) {
@@ -106,6 +108,24 @@ const BillsPage: React.FC = () => {
     }
   }
 
+  const handleTogglePaid = async (billId: string, currentPaidStatus: boolean) => {
+    try {
+      const { error } = await supabase
+        .from('recurring_expenses')
+        .update({
+          is_paid: !currentPaidStatus,
+          last_paid_date: !currentPaidStatus ? new Date().toISOString().split('T')[0] : null
+        })
+        .eq('id', billId)
+
+      if (error) throw error
+      await loadBills()
+    } catch (err) {
+      console.error('Error updating bill payment status:', err)
+      setError('Failed to update payment status')
+    }
+  }
+
   const handleEdit = (bill: RecurringExpense) => {
     setEditingBill(bill)
     setFormData({
@@ -113,7 +133,8 @@ const BillsPage: React.FC = () => {
       amount: bill.amount.toString(),
       frequency: bill.frequency,
       due_date: bill.due_date,
-      custom_days: bill.custom_days?.toString() || '30'
+      custom_days: bill.custom_days?.toString() || '30',
+      is_paid: bill.is_paid || false
     })
     setShowAddForm(true)
   }
@@ -124,7 +145,8 @@ const BillsPage: React.FC = () => {
       amount: '',
       frequency: 'monthly',
       due_date: '',
-      custom_days: '30'
+      custom_days: '30',
+      is_paid: false
     })
     setEditingBill(null)
     setShowAddForm(false)
@@ -275,7 +297,7 @@ const BillsPage: React.FC = () => {
               )}
 
               {/* Due Date */}
-              <div className="md:col-span-2">
+              <div>
                 <label className="block text-rose-pine-text text-sm font-medium mb-2 flex items-center">
                   <Calendar className="w-4 h-4 mr-2" />
                   Next Due Date
@@ -287,6 +309,21 @@ const BillsPage: React.FC = () => {
                   className="pixel-input w-full"
                   required
                 />
+              </div>
+
+              {/* Payment Status */}
+              <div>
+                <label className="flex items-center space-x-2 h-full">
+                  <input
+                    type="checkbox"
+                    checked={formData.is_paid}
+                    onChange={(e) => setFormData(prev => ({ ...prev, is_paid: e.target.checked }))}
+                    className="w-4 h-4 text-rose-pine-pine bg-rose-pine-surface border-rose-pine-muted rounded focus:ring-rose-pine-pine focus:ring-2"
+                  />
+                  <span className="text-rose-pine-text text-sm font-medium">
+                    Mark as paid
+                  </span>
+                </label>
               </div>
             </div>
 
@@ -338,10 +375,31 @@ const BillsPage: React.FC = () => {
                   </div>
                   <div className="flex items-center justify-between text-sm text-rose-pine-muted">
                     <span>{getFrequencyLabel(bill.frequency, bill.custom_days)}</span>
-                    <span>Due: {formatDate(new Date(bill.due_date))}</span>
+                    <div className="flex items-center space-x-4">
+                      <span>Due: {formatDate(new Date(bill.due_date))}</span>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${
+                        bill.is_paid 
+                          ? 'bg-rose-pine-pine/20 text-rose-pine-pine' 
+                          : 'bg-rose-pine-love/20 text-rose-pine-love'
+                      }`}>
+                        {bill.is_paid ? 'Paid' : 'Unpaid'}
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center space-x-2 ml-4">
+                  <button
+                    onClick={() => handleTogglePaid(bill.id, bill.is_paid || false)}
+                    className={`pixel-button-secondary p-2 ${
+                      bill.is_paid 
+                        ? 'text-rose-pine-love hover:bg-rose-pine-love hover:text-rose-pine-text' 
+                        : 'text-rose-pine-pine hover:bg-rose-pine-pine hover:text-rose-pine-text'
+                    }`}
+                    aria-label={bill.is_paid ? 'Mark as unpaid' : 'Mark as paid'}
+                    title={bill.is_paid ? 'Mark as unpaid' : 'Mark as paid'}
+                  >
+                    {bill.is_paid ? '✓' : '○'}
+                  </button>
                   <button
                     onClick={() => handleEdit(bill)}
                     className="pixel-button-secondary p-2"

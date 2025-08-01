@@ -217,7 +217,16 @@ const Dashboard: React.FC = () => {
       {/* Quick Actions */}
       <div className="pixel-card p-6">
         <h2 className="text-xl font-bold text-rose-pine-text mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <button 
+            onClick={() => navigate('/income')}
+            className="pixel-button-secondary p-4 text-left hover:bg-rose-pine-overlay transition-colors"
+          >
+            <DollarSign className="w-6 h-6 mb-2 text-rose-pine-gold" />
+            <h3 className="font-semibold text-rose-pine-text">Track Income</h3>
+            <p className="text-sm text-rose-pine-muted">Log paychecks & income</p>
+          </button>
+          
           <button 
             onClick={() => navigate('/bills')}
             className="pixel-button-secondary p-4 text-left hover:bg-rose-pine-overlay transition-colors"
@@ -240,9 +249,9 @@ const Dashboard: React.FC = () => {
             onClick={() => navigate('/dashboard')}
             className="pixel-button-secondary p-4 text-left hover:bg-rose-pine-overlay transition-colors"
           >
-            <DollarSign className="w-6 h-6 mb-2 text-rose-pine-gold" />
+            <Settings className="w-6 h-6 mb-2 text-rose-pine-muted" />
             <h3 className="font-semibold text-rose-pine-text">Settings</h3>
-            <p className="text-sm text-rose-pine-muted">Configure pay frequency</p>
+            <p className="text-sm text-rose-pine-muted">Configure preferences</p>
           </button>
         </div>
       </div>

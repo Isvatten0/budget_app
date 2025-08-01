@@ -28,6 +28,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const getActiveTab = () => {
     const path = location.pathname
     if (path === '/dashboard' || path === '/') return 'dashboard'
+    if (path === '/income') return 'income'
     if (path === '/bills') return 'bills'
     if (path === '/goals') return 'goals'
     return 'dashboard'
@@ -57,6 +58,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               >
                 <TrendingUp className="w-4 h-4 mr-2" />
                 Dashboard
+              </button>
+              <button 
+                onClick={() => handleTabClick('income')}
+                className={`pixel-button-secondary px-3 py-2 text-sm transition-all ${
+                  getActiveTab() === 'income' ? 'bg-rose-pine-pine text-rose-pine-text' : ''
+                }`}
+              >
+                <DollarSign className="w-4 h-4 mr-2" />
+                Income
               </button>
               <button 
                 onClick={() => handleTabClick('bills')}

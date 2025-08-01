@@ -73,6 +73,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
           default_currency: settings.default_currency,
           theme: settings.theme,
           custom_days: settings.custom_days
+        }, {
+          onConflict: 'user_id'
         })
 
       if (error) throw error

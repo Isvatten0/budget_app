@@ -12,6 +12,8 @@ const GoalsPage: React.FC = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [showAddForm, setShowAddForm] = useState(false)
+  const [showContributionForm, setShowContributionForm] = useState(false)
+  const [selectedGoal, setSelectedGoal] = useState<Goal | null>(null)
   const [editingGoal, setEditingGoal] = useState<Goal | null>(null)
   
   const [formData, setFormData] = useState({
@@ -19,6 +21,12 @@ const GoalsPage: React.FC = () => {
     target_amount: '',
     current_amount: '',
     deadline: '',
+    notes: ''
+  })
+
+  const [contributionForm, setContributionForm] = useState({
+    amount: '',
+    date: new Date().toISOString().split('T')[0],
     notes: ''
   })
 
@@ -146,6 +154,68 @@ const GoalsPage: React.FC = () => {
     const diffTime = deadlineDate.getTime() - today.getTime()
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
     return diffDays
+  }
+
+  const calculateSavingsNeeded = (goal: Goal) => {
+    if (!goal.deadline) return null
+    
+    const remaining = goal.target_amount - goal.current_amount
+    const daysLeft = getDaysUntilDeadline(goal.deadline)
+    
+    if (daysLeft <= 0) return null
+    
+    // Calculate per-paycheck savings needed (assuming biweekly pay)
+    const paychecksLeft = Math.ceil(daysLeft / 14)
+    return {
+      total: remaining,
+      perPaycheck: remaining / paychecksLeft,
+      paychecksLeft,
+      daysLeft
+    }
+  }
+
+  const handleAddContribution = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!user?.id || !selectedGoal) return
+
+    try {
+      const contributionAmount = parseFloat(contributionForm.amount)
+      const newCurrentAmount = selectedGoal.current_amount + contributionAmount
+
+      // Update goal with new current amount
+      const { error: goalError } = await supabase
+        .from('goals')
+        .update({ current_amount: newCurrentAmount })
+        .eq('id', selectedGoal.id)
+
+      if (goalError) throw goalError
+
+      // Add contribution record
+      const { error: contributionError } = await supabase
+        .from('goal_contributions')
+        .insert({
+          goal_id: selectedGoal.id,
+          user_id: user.id,
+          amount: contributionAmount,
+          contribution_date: contributionForm.date,
+          notes: contributionForm.notes || null
+        })
+
+      if (contributionError) throw contributionError
+
+      // Reset form and reload
+      setContributionForm({
+        amount: '',
+        date: new Date().toISOString().split('T')[0],
+        notes: ''
+      })
+      setShowContributionForm(false)
+      setSelectedGoal(null)
+      await loadGoals()
+    } catch (err) {
+      console.error('Error adding contribution:', err)
+      setError('Failed to add contribution')
+    }
   }
 
   if (loading) {
@@ -324,6 +394,109 @@ const GoalsPage: React.FC = () => {
         </div>
       )}
 
+      {/* Contribution Form */}
+      {showContributionForm && selectedGoal && (
+        <div className="pixel-card p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-rose-pine-text">
+              Add Contribution to "{selectedGoal.name}"
+            </h2>
+            <button
+              onClick={() => {
+                setShowContributionForm(false)
+                setSelectedGoal(null)
+              }}
+              className="pixel-button-secondary p-2"
+            >
+              <X size={20} />
+            </button>
+          </div>
+
+          <form onSubmit={handleAddContribution} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Amount */}
+              <div>
+                <label className="block text-rose-pine-text text-sm font-medium mb-2 flex items-center">
+                  <DollarSign className="w-4 h-4 mr-2" />
+                  Contribution Amount
+                </label>
+                <input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={contributionForm.amount}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    if (value.includes('.') && value.split('.')[1]?.length > 2) {
+                      return
+                    }
+                    setContributionForm(prev => ({ ...prev, amount: value }))
+                  }}
+                  onBlur={(e) => {
+                    const value = parseFloat(e.target.value)
+                    if (!isNaN(value)) {
+                      setContributionForm(prev => ({ ...prev, amount: value.toFixed(2) }))
+                    }
+                  }}
+                  className="pixel-input w-full"
+                  placeholder="0.00"
+                  required
+                />
+              </div>
+
+              {/* Date */}
+              <div>
+                <label className="block text-rose-pine-text text-sm font-medium mb-2 flex items-center">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Contribution Date
+                </label>
+                <input
+                  type="date"
+                  value={contributionForm.date}
+                  onChange={(e) => setContributionForm(prev => ({ ...prev, date: e.target.value }))}
+                  className="pixel-input w-full"
+                  required
+                />
+              </div>
+
+              {/* Notes */}
+              <div className="md:col-span-2">
+                <label className="block text-rose-pine-text text-sm font-medium mb-2">
+                  Notes (Optional)
+                </label>
+                <textarea
+                  value={contributionForm.notes}
+                  onChange={(e) => setContributionForm(prev => ({ ...prev, notes: e.target.value }))}
+                  className="pixel-input w-full h-20 resize-none"
+                  placeholder="Add any notes about this contribution..."
+                />
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex space-x-3 pt-4">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowContributionForm(false)
+                  setSelectedGoal(null)
+                }}
+                className="pixel-button-secondary flex-1"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="pixel-button flex-1 flex items-center justify-center space-x-2"
+              >
+                <Save size={16} />
+                <span>Add Contribution</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
       {/* Goals List */}
       <div className="space-y-4">
         {goals.length === 0 ? (
@@ -376,17 +549,41 @@ const GoalsPage: React.FC = () => {
                           : 'Goal completed! 🎉'
                         }
                       </span>
-                                             {goal.deadline && daysUntilDeadline !== null && (
-                         <span className={daysUntilDeadline < 30 ? 'text-rose-pine-love' : ''}>
-                           {daysUntilDeadline > 0 
-                             ? `${daysUntilDeadline} days left`
-                             : daysUntilDeadline === 0
-                             ? 'Due today!'
-                             : `${Math.abs(daysUntilDeadline)} days overdue`
-                           }
-                         </span>
-                       )}
+                      {goal.deadline && daysUntilDeadline !== null && (
+                        <span className={daysUntilDeadline < 30 ? 'text-rose-pine-love' : ''}>
+                          {daysUntilDeadline > 0 
+                            ? `${daysUntilDeadline} days left`
+                            : daysUntilDeadline === 0
+                            ? 'Due today!'
+                            : `${Math.abs(daysUntilDeadline)} days overdue`
+                          }
+                        </span>
+                      )}
                     </div>
+
+                    {/* Savings Recommendations */}
+                    {remaining > 0 && goal.deadline && (
+                      <div className="mt-3 p-3 bg-rose-pine-surface border border-rose-pine-subtle rounded">
+                        {(() => {
+                          const savingsNeeded = calculateSavingsNeeded(goal)
+                          if (!savingsNeeded) return null
+                          
+                          return (
+                            <div className="text-sm">
+                              <div className="font-medium text-rose-pine-text mb-1">
+                                💡 Savings Recommendation:
+                              </div>
+                              <div className="text-rose-pine-muted">
+                                Save <span className="font-semibold text-rose-pine-text">
+                                  {formatCurrency(savingsNeeded.perPaycheck)}
+                                </span> per paycheck 
+                                ({savingsNeeded.paychecksLeft} paychecks left)
+                              </div>
+                            </div>
+                          )
+                        })()}
+                      </div>
+                    )}
 
                     {/* Notes */}
                     {goal.notes && (
@@ -397,6 +594,19 @@ const GoalsPage: React.FC = () => {
                   </div>
 
                   <div className="flex items-center space-x-2 ml-4">
+                    {remaining > 0 && (
+                      <button
+                        onClick={() => {
+                          setSelectedGoal(goal)
+                          setShowContributionForm(true)
+                        }}
+                        className="pixel-button p-2"
+                        aria-label="Add contribution"
+                        title="Add contribution"
+                      >
+                        <Plus size={16} />
+                      </button>
+                    )}
                     <button
                       onClick={() => handleEdit(goal)}
                       className="pixel-button-secondary p-2"

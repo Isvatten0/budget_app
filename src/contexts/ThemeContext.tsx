@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
+import { supabase } from '../lib/supabase'
 
 type Theme = 'dark' | 'light'
 
@@ -21,6 +22,31 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
     return 'dark'
   })
+
+  // Function to load theme from database
+  const loadThemeFromDatabase = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        const { data: settings } = await supabase
+          .from('user_settings')
+          .select('theme')
+          .eq('user_id', user.id)
+          .single()
+        
+        if (settings?.theme && settings.theme !== theme) {
+          setThemeState(settings.theme)
+        }
+      }
+    } catch (error) {
+      console.error('Error loading theme from database:', error)
+    }
+  }
+
+  // Load theme from database on mount
+  useEffect(() => {
+    loadThemeFromDatabase()
+  }, [])
 
   useEffect(() => {
     // Update document class and localStorage
