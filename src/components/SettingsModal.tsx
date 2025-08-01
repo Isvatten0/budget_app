@@ -19,7 +19,6 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
     pay_frequency: 'biweekly' as 'weekly' | 'biweekly' | 'monthly' | 'custom',
     last_pay_date: '',
     default_currency: 'USD',
-    theme: 'dark' as 'dark' | 'light',
     custom_days: 14
   })
 
@@ -44,7 +43,6 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
           pay_frequency: data.pay_frequency,
           last_pay_date: data.last_pay_date,
           default_currency: data.default_currency,
-          theme: data.theme,
           custom_days: data.custom_days || 14
         })
       }
@@ -71,7 +69,6 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
           pay_frequency: settings.pay_frequency,
           last_pay_date: settings.last_pay_date,
           default_currency: settings.default_currency,
-          theme: settings.theme,
           custom_days: settings.custom_days
         }, {
           onConflict: 'user_id'
@@ -211,23 +208,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
             </select>
           </div>
 
-          {/* Theme */}
-          <div>
-            <label className="block text-rose-pine-text text-sm font-medium mb-2">
-              Theme
-            </label>
-            <select
-              value={settings.theme}
-              onChange={(e) => setSettings(prev => ({ 
-                ...prev, 
-                theme: e.target.value as 'dark' | 'light' 
-              }))}
-              className="pixel-select w-full"
-            >
-              <option value="dark">Dark (Classic)</option>
-              <option value="light">Light (Dawn)</option>
-            </select>
-          </div>
+
         </div>
 
         {/* Actions */}

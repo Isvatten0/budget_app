@@ -18,20 +18,7 @@
     --color-rose-pine-iris: 196 167 231;
   }
 
-  .light {
-    --color-rose-pine-base: 250 244 237;
-    --color-rose-pine-surface: 255 250 243;
-    --color-rose-pine-overlay: 242 233 225;
-    --color-rose-pine-muted: 152 147 165;
-    --color-rose-pine-subtle: 121 117 147;
-    --color-rose-pine-text: 87 82 121;
-    --color-rose-pine-love: 180 99 122;
-    --color-rose-pine-gold: 234 157 52;
-    --color-rose-pine-rose: 215 130 126;
-    --color-rose-pine-pine: 40 105 131;
-    --color-rose-pine-foam: 86 148 159;
-    --color-rose-pine-iris: 144 122 169;
-  }
+
 
   /* Enhanced Starry Background Animations */
   @keyframes twinkle-1 {
@@ -106,37 +93,7 @@
     animation: twinkle-1 4s ease-in-out infinite;
   }
 
-  .light body {
-    @apply bg-rose-pine-dawn-base text-rose-pine-dawn-text;
-    background-image: 
-      /* Dark stars for light theme - various sizes and shapes */
-      radial-gradient(4px 4px at 50px 50px, rgba(87,82,121,0.9), transparent),
-      radial-gradient(3px 3px at 150px 100px, rgba(87,82,121,0.8), transparent),
-      radial-gradient(2px 2px at 250px 30px, rgba(87,82,121,0.9), transparent),
-      radial-gradient(3px 3px at 350px 120px, rgba(87,82,121,0.7), transparent),
-      radial-gradient(2px 2px at 450px 60px, rgba(87,82,121,0.8), transparent),
-      /* Red stars */
-      radial-gradient(3px 3px at 80px 80px, rgba(180,99,122,0.8), transparent),
-      radial-gradient(2px 2px at 180px 150px, rgba(180,99,122,0.7), transparent),
-      radial-gradient(2px 2px at 280px 90px, rgba(180,99,122,0.6), transparent),
-      /* Blue stars */
-      radial-gradient(3px 3px at 380px 180px, rgba(40,105,131,0.8), transparent),
-      radial-gradient(2px 2px at 480px 110px, rgba(40,105,131,0.7), transparent),
-      radial-gradient(2px 2px at 580px 200px, rgba(40,105,131,0.6), transparent),
-      /* Yellow/Gold stars */
-      radial-gradient(3px 3px at 120px 40px, rgba(234,157,52,0.9), transparent),
-      radial-gradient(2px 2px at 220px 170px, rgba(234,157,52,0.8), transparent),
-      radial-gradient(2px 2px at 320px 70px, rgba(234,157,52,0.7), transparent),
-      /* Purple stars */
-      radial-gradient(3px 3px at 420px 140px, rgba(144,122,169,0.8), transparent),
-      radial-gradient(2px 2px at 520px 90px, rgba(144,122,169,0.7), transparent),
-      /* Diamond shapes (using rotated squares) */
-      linear-gradient(45deg, transparent 40%, rgba(87,82,121,0.6) 50%, transparent 60%) 100px 50px / 5px 5px,
-      linear-gradient(45deg, transparent 40%, rgba(180,99,122,0.7) 50%, transparent 60%) 300px 150px / 4px 4px,
-      linear-gradient(45deg, transparent 40%, rgba(40,105,131,0.6) 50%, transparent 60%) 500px 80px / 3px 3px,
-      linear-gradient(45deg, transparent 40%, rgba(234,157,52,0.8) 50%, transparent 60%) 200px 180px / 4px 4px;
-    animation: twinkle-2 5s ease-in-out infinite;
-  }
+
 
   /* Ensure the root element also gets theme colors */
   #root {
@@ -144,9 +101,7 @@
     min-height: 100vh;
   }
 
-  .light #root {
-    @apply bg-rose-pine-dawn-base text-rose-pine-dawn-text;
-  }
+
 }
 
 @layer components {
@@ -158,10 +113,7 @@
 
 
 
-  .light .pixel-card {
-    @apply bg-rose-pine-dawn-surface border-rose-pine-dawn-overlay;
-    @apply hover:border-rose-pine-dawn-subtle;
-  }
+
 
   .pixel-button {
     @apply bg-rose-pine-pine text-rose-pine-text font-medium px-4 py-2;
@@ -175,10 +127,7 @@
     animation: pixel-bounce 0.5s ease-in-out;
   }
 
-  .light .pixel-button {
-    @apply bg-rose-pine-dawn-pine text-rose-pine-dawn-text border-rose-pine-dawn-overlay;
-    @apply hover:bg-rose-pine-dawn-iris;
-  }
+
 
   .pixel-button-secondary {
     @apply bg-rose-pine-overlay text-rose-pine-text font-medium px-4 py-2;
@@ -187,10 +136,7 @@
     @apply active:shadow-pixel-inset active:translate-y-0.5;
   }
 
-  .light .pixel-button-secondary {
-    @apply bg-rose-pine-dawn-overlay text-rose-pine-dawn-text border-rose-pine-dawn-subtle;
-    @apply hover:bg-rose-pine-dawn-subtle;
-  }
+
 
   .pixel-input {
     @apply bg-rose-pine-overlay text-rose-pine-text border-2 border-rose-pine-subtle;
@@ -199,10 +145,7 @@
     @apply placeholder-rose-pine-muted;
   }
 
-  .light .pixel-input {
-    @apply bg-rose-pine-dawn-overlay text-rose-pine-dawn-text border-rose-pine-dawn-subtle;
-    @apply focus:border-rose-pine-dawn-pine placeholder-rose-pine-dawn-muted;
-  }
+
 
   .pixel-select {
     @apply bg-rose-pine-overlay text-rose-pine-text border-2 border-rose-pine-subtle;
@@ -210,27 +153,20 @@
     @apply focus:outline-none focus:border-rose-pine-pine focus:shadow-pixel;
   }
 
-  .light .pixel-select {
-    @apply bg-rose-pine-dawn-overlay text-rose-pine-dawn-text border-rose-pine-dawn-subtle;
-    @apply focus:border-rose-pine-dawn-pine;
-  }
+
 
   .pixel-badge {
     @apply bg-rose-pine-iris text-rose-pine-text px-2 py-1 text-xs font-medium;
     @apply border border-rose-pine-subtle rounded-none;
   }
 
-  .light .pixel-badge {
-    @apply bg-rose-pine-dawn-iris text-rose-pine-dawn-text border-rose-pine-dawn-subtle;
-  }
+
 
   .pixel-divider {
     @apply border-t-2 border-rose-pine-overlay my-4;
   }
 
-  .light .pixel-divider {
-    @apply border-rose-pine-dawn-overlay;
-  }
+
 
   .pixel-animation {
     @apply animate-pixel-fade-in;
@@ -326,41 +262,5 @@
     animation: shimmer 3s ease-in-out infinite;
   }
 
-  .light .progress-bar {
-    @apply bg-rose-pine-dawn-overlay border-rose-pine-dawn-subtle;
-  }
 
-  .light .progress-bar::before {
-    background: linear-gradient(90deg, 
-      rgba(87,82,121,0.1) 0%, 
-      rgba(87,82,121,0.3) 50%, 
-      rgba(87,82,121,0.1) 100%);
-  }
-
-  .light .game-card {
-    @apply border-rose-pine-dawn-gold;
-    background-image: 
-      linear-gradient(45deg, transparent 40%, rgba(234,157,52,0.1) 50%, transparent 60%);
-  }
-
-  .light .game-card:hover {
-    @apply border-rose-pine-dawn-iris;
-  }
-
-  .light .level-indicator {
-    @apply bg-rose-pine-dawn-gold text-rose-pine-dawn-base border-rose-pine-dawn-overlay;
-  }
-
-  .light .xp-bar {
-    @apply bg-rose-pine-dawn-overlay border-rose-pine-dawn-subtle;
-  }
-
-  .light .xp-fill {
-    @apply bg-gradient-to-r from-rose-pine-dawn-gold to-rose-pine-dawn-iris;
-    background-image: 
-      linear-gradient(90deg, 
-        rgba(87,82,121,0.2) 0%, 
-        rgba(87,82,121,0.4) 50%, 
-        rgba(87,82,121,0.2) 100%);
-  }
 }

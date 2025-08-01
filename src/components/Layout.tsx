@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
-import { useTheme } from '../contexts/ThemeContext'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Moon, Sun, LogOut, Settings, PiggyBank, TrendingUp, Calendar, Target, X, DollarSign } from 'lucide-react'
+import { LogOut, Settings, PiggyBank, TrendingUp, Calendar, Target, X, DollarSign } from 'lucide-react'
 import FloatingDecorations from './ui/FloatingDecorations'
 import SettingsModal from './SettingsModal'
 
@@ -12,7 +11,6 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { signOut, user } = useAuth()
-  const { theme, toggleTheme } = useTheme()
   const location = useLocation()
   const navigate = useNavigate()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -46,7 +44,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <div className="w-10 h-10 bg-rose-pine-gold border-2 border-rose-pine-overlay shadow-pixel flex items-center justify-center">
                 <PiggyBank className="w-6 h-6 text-rose-pine-base" />
               </div>
-              <h1 className="text-xl font-bold text-rose-pine-text font-pixel">Budget Planner</h1>
+              <h1 className="text-xl font-bold text-rose-pine-text font-arcade">BUDGET ADVENTURE</h1>
             </div>
 
             {/* Navigation */}
@@ -91,15 +89,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* Right side controls */}
             <div className="flex items-center space-x-2">
-              {/* Theme toggle */}
-              <button
-                onClick={toggleTheme}
-                className="pixel-button-secondary p-2"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
-
               {/* Settings */}
               <button 
                 onClick={() => setIsSettingsOpen(true)}
