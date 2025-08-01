@@ -26,6 +26,8 @@ import UpcomingBillsCard from './dashboard/UpcomingBillsCard'
 import GoalsCard from './dashboard/GoalsCard'
 import BudgetOverviewCard from './dashboard/BudgetOverviewCard'
 import LoadingSpinner from './ui/LoadingSpinner'
+import { achievementService, Achievement } from '../lib/achievement-service'
+import AchievementToast from './ui/AchievementToast'
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth()
@@ -40,6 +42,10 @@ const Dashboard: React.FC = () => {
   const [goals, setGoals] = useState<Goal[]>([])
   const [settings, setSettings] = useState<UserSettings | null>(null)
   const [forecast, setForecast] = useState<BudgetForecast | null>(null)
+  
+  // Achievement state
+  const [newAchievement, setNewAchievement] = useState<Achievement | null>(null)
+  const [showAchievementToast, setShowAchievementToast] = useState(false)
 
   useEffect(() => {
     if (user) {
@@ -115,6 +121,21 @@ const Dashboard: React.FC = () => {
     }
   }
 
+  const checkForAchievements = async () => {
+    if (!user?.id) return
+
+    try {
+      const newAchievements = await achievementService.checkAchievements(user.id, 'dashboard_load')
+      
+      if (newAchievements.length > 0) {
+        setNewAchievement(newAchievements[0]) // Show the first achievement
+        setShowAchievementToast(true)
+      }
+    } catch (error) {
+      console.error('Error checking achievements:', error)
+    }
+  }
+
   useEffect(() => {
     if (settings && income && expenses && goals) {
       const budgetForecast = calculateBudgetForecast(
@@ -178,6 +199,17 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Achievement Toast */}
+      {newAchievement && (
+        <AchievementToast
+          achievement={newAchievement}
+          isVisible={showAchievementToast}
+          onClose={() => {
+            setShowAchievementToast(false)
+            setNewAchievement(null)
+          }}
+        />
+      )}
       {/* Game Header */}
       <div className="game-card p-6">
         <div className="flex items-center justify-between mb-4">
@@ -186,7 +218,7 @@ const Dashboard: React.FC = () => {
               LVL {Math.floor((goals.length + expenses.length) / 3) + 1}
             </div>
             <div className="flex-1">
-              <h1 className="text-2xl font-bold text-rose-pine-text font-pixel">
+              <h1 className="text-2xl font-bold text-rose-pine-text font-arcade">
                 Welcome back, {user?.email?.split('@')[0]}! 🎮
               </h1>
               <p className="text-rose-pine-muted">
@@ -250,14 +282,14 @@ const Dashboard: React.FC = () => {
 
       {/* Quest Board */}
       <div className="game-card p-6">
-        <h2 className="text-xl font-bold text-rose-pine-text mb-4 font-pixel">🎯 Quest Board</h2>
+        <h2 className="text-xl font-bold text-rose-pine-text mb-4 font-arcade">🎯 QUEST BOARD</h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <button 
             onClick={() => navigate('/income')}
             className="pixel-button-secondary p-4 text-left hover:bg-rose-pine-overlay transition-colors"
           >
             <DollarSign className="w-6 h-6 mb-2 text-rose-pine-gold" />
-            <h3 className="font-semibold text-rose-pine-text font-pixel">💰 Collect Gold</h3>
+            <h3 className="font-semibold text-rose-pine-text font-arcade">💰 COLLECT GOLD</h3>
             <p className="text-sm text-rose-pine-muted">Log your income & rewards</p>
           </button>
           
@@ -266,7 +298,7 @@ const Dashboard: React.FC = () => {
             className="pixel-button-secondary p-4 text-left hover:bg-rose-pine-overlay transition-colors"
           >
             <Calendar className="w-6 h-6 mb-2 text-rose-pine-pine" />
-            <h3 className="font-semibold text-rose-pine-text font-pixel">⚔️ Battle Bills</h3>
+            <h3 className="font-semibold text-rose-pine-text font-arcade">⚔️ BATTLE BILLS</h3>
             <p className="text-sm text-rose-pine-muted">Defeat recurring expenses</p>
           </button>
           
@@ -275,7 +307,7 @@ const Dashboard: React.FC = () => {
             className="pixel-button-secondary p-4 text-left hover:bg-rose-pine-overlay transition-colors"
           >
             <Target className="w-6 h-6 mb-2 text-rose-pine-iris" />
-            <h3 className="font-semibold text-rose-pine-text font-pixel">🏆 Epic Quests</h3>
+            <h3 className="font-semibold text-rose-pine-text font-arcade">🏆 EPIC QUESTS</h3>
             <p className="text-sm text-rose-pine-muted">Complete savings missions</p>
           </button>
           
@@ -284,7 +316,7 @@ const Dashboard: React.FC = () => {
             className="pixel-button-secondary p-4 text-left hover:bg-rose-pine-overlay transition-colors"
           >
             <Settings className="w-6 h-6 mb-2 text-rose-pine-muted" />
-            <h3 className="font-semibold text-rose-pine-text font-pixel">⚙️ Character</h3>
+            <h3 className="font-semibold text-rose-pine-text font-arcade">⚙️ CHARACTER</h3>
             <p className="text-sm text-rose-pine-muted">Customize your settings</p>
           </button>
         </div>
@@ -301,9 +333,9 @@ const Dashboard: React.FC = () => {
                 <AlertTriangle className="w-6 h-6 text-rose-pine-love" />
               )}
               <div>
-                <p className="text-sm text-rose-pine-muted font-pixel">🎯 Mission Status</p>
-                <p className="font-semibold text-rose-pine-text font-pixel">
-                  {forecast.discretionary > 0 ? '✅ Mission Success!' : '⚠️ Mission Critical'}
+                <p className="text-sm text-rose-pine-muted font-arcade">🎯 MISSION STATUS</p>
+                <p className="font-semibold text-rose-pine-text font-arcade">
+                  {forecast.discretionary > 0 ? '✅ MISSION SUCCESS!' : '⚠️ MISSION CRITICAL'}
                 </p>
               </div>
             </div>
@@ -313,7 +345,7 @@ const Dashboard: React.FC = () => {
             <div className="flex items-center space-x-3">
               <Calendar className="w-6 h-6 text-rose-pine-gold" />
               <div>
-                <p className="text-sm text-rose-pine-muted font-pixel">💰 Next Reward</p>
+                <p className="text-sm text-rose-pine-muted font-arcade">💰 NEXT REWARD</p>
                 <p className="font-semibold text-rose-pine-text font-pixel">
                   {forecast.nextPayDate ? formatRelativeDate(forecast.nextPayDate) : 'Not set'}
                 </p>
@@ -325,9 +357,9 @@ const Dashboard: React.FC = () => {
             <div className="flex items-center space-x-3">
               <TrendingUp className="w-6 h-6 text-rose-pine-iris" />
               <div>
-                <p className="text-sm text-rose-pine-muted font-pixel">🏆 Quest Progress</p>
-                <p className="font-semibold text-rose-pine-text font-pixel">
-                  {forecast.goalsProgress.filter(g => g.onTrack).length}/{forecast.goalsProgress.length} Complete
+                <p className="text-sm text-rose-pine-muted font-arcade">🏆 QUEST PROGRESS</p>
+                <p className="font-semibold text-rose-pine-text font-arcade">
+                  {forecast.goalsProgress.filter(g => g.onTrack).length}/{forecast.goalsProgress.length} COMPLETE
                 </p>
               </div>
             </div>

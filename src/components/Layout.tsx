@@ -3,6 +3,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { useTheme } from '../contexts/ThemeContext'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Moon, Sun, LogOut, Settings, PiggyBank, TrendingUp, Calendar, Target, X, DollarSign } from 'lucide-react'
+import FloatingDecorations from './ui/FloatingDecorations'
 import SettingsModal from './SettingsModal'
 
 interface LayoutProps {
@@ -147,24 +148,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
       </div>
       
-      {/* Floating coins */}
-      <div className="fixed top-20 right-12 pointer-events-none">
-        <div className="w-8 h-8 bg-rose-pine-gold border border-rose-pine-overlay shadow-pixel flex items-center justify-center coin-spin">
-          <span className="text-rose-pine-base font-bold text-xs">$</span>
-        </div>
-      </div>
-      
-      <div className="fixed top-32 right-20 pointer-events-none">
-        <div className="w-6 h-6 bg-rose-pine-iris border border-rose-pine-overlay shadow-pixel flex items-center justify-center coin-spin" style={{ animationDelay: '0.5s' }}>
-          <span className="text-rose-pine-base font-bold text-xs">★</span>
-        </div>
-      </div>
-      
-      <div className="fixed bottom-20 left-8 pointer-events-none">
-        <div className="w-10 h-10 bg-rose-pine-pine border border-rose-pine-overlay shadow-pixel flex items-center justify-center coin-spin" style={{ animationDelay: '1s' }}>
-          <span className="text-rose-pine-base font-bold text-xs">💎</span>
-        </div>
-      </div>
+      {/* Random floating decorations */}
+      <FloatingDecorations />
 
       {/* Settings Modal */}
       {isSettingsOpen && (

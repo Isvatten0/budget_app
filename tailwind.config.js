@@ -38,7 +38,8 @@ module.exports = {
         }
       },
       fontFamily: {
-        'pixel': ['Courier New', 'monospace'],
+        'pixel': ['Press Start 2P', 'Courier New', 'monospace'],
+        'arcade': ['Press Start 2P', 'Courier New', 'monospace'],
         'sans': ['Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
@@ -46,6 +47,7 @@ module.exports = {
         'pixel-fade-in': 'pixel-fade-in 0.3s ease-out',
         'coin-spin': 'coin-spin 1s linear infinite',
         'piggy-wiggle': 'piggy-wiggle 2s ease-in-out infinite',
+        'random-float': 'random-float 3s ease-in-out',
       },
       keyframes: {
         'pixel-bounce': {
@@ -63,6 +65,12 @@ module.exports = {
         'piggy-wiggle': {
           '0%, 100%': { transform: 'rotate(-2deg)' },
           '50%': { transform: 'rotate(2deg)' },
+        },
+        'random-float': {
+          '0%, 100%': { transform: 'translate(0, 0) rotate(0deg) scale(1)' },
+          '25%': { transform: 'translate(10px, -15px) rotate(90deg) scale(1.1)' },
+          '50%': { transform: 'translate(-5px, -25px) rotate(180deg) scale(0.9)' },
+          '75%': { transform: 'translate(-15px, -10px) rotate(270deg) scale(1.05)' },
         },
       },
       boxShadow: {
