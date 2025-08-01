@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
-import { useTheme } from '../../contexts/ThemeContext'
-import { Moon, Sun, Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff } from 'lucide-react'
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('')
@@ -12,7 +11,6 @@ const Login: React.FC = () => {
   const [loading, setLoading] = useState(false)
   
   const { signIn } = useAuth()
-  const { theme, toggleTheme } = useTheme()
   const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -37,16 +35,7 @@ const Login: React.FC = () => {
   return (
     <div className="min-h-screen bg-rose-pine-base flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Theme toggle */}
-        <div className="flex justify-end mb-8">
-          <button
-            onClick={toggleTheme}
-            className="pixel-button-secondary p-2"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-        </div>
+
 
         {/* Pixel art logo placeholder */}
         <div className="text-center mb-8">
@@ -54,8 +43,8 @@ const Login: React.FC = () => {
             <div className="w-16 h-16 bg-rose-pine-gold mx-auto mb-2"></div>
             <div className="text-rose-pine-text font-pixel text-lg">💰</div>
           </div>
-          <h1 className="text-3xl font-bold text-rose-pine-text mb-2">Budget Planner</h1>
-          <p className="text-rose-pine-muted">Sign in to your account</p>
+          <h1 className="text-3xl font-bold text-rose-pine-text mb-2 font-arcade">BUDGET ADVENTURE</h1>
+          <p className="text-rose-pine-muted font-arcade">SIGN IN TO YOUR ACCOUNT</p>
         </div>
 
         {/* Login form */}

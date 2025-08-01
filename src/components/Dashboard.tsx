@@ -211,10 +211,7 @@ const Dashboard: React.FC = () => {
         />
       )}
 
-      {/* Font Test - Remove this after confirming font works */}
-      <div className="fixed top-0 left-0 z-50 bg-red-500 text-white p-2 font-arcade text-xs">
-        FONT TEST: PRESS START 2P
-      </div>
+
       {/* Game Header */}
       <div className="game-card p-6">
         <div className="flex items-center justify-between mb-4">
