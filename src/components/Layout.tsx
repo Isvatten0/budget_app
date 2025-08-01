@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { LogOut, Settings, PiggyBank, TrendingUp, Calendar, Target, X, DollarSign, Trophy, CreditCard } from 'lucide-react'
+import { LogOut, Settings, PiggyBank, TrendingUp, Calendar, Target, X, DollarSign, Trophy, CreditCard, FolderOpen } from 'lucide-react'
 import FloatingDecorations from './ui/FloatingDecorations'
 import SettingsModal from './SettingsModal'
 

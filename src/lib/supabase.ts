@@ -75,3 +75,39 @@ export interface UserSettings {
   created_at: string
   updated_at: string
 }
+
+export interface BudgetCategory {
+  id: string
+  user_id: string
+  name: string
+  description?: string
+  allocated_amount: number
+  current_balance: number
+  color: string
+  icon: string
+  is_active: boolean
+  created_at: string
+  updated_at: string
+}
+
+export interface BudgetCategoryTransaction {
+  id: string
+  user_id: string
+  category_id: string
+  description: string
+  amount: number
+  transaction_date: string
+  type: 'expense' | 'refund'
+  created_at: string
+}
+
+export interface BudgetCategoryRefill {
+  id: string
+  user_id: string
+  category_id: string
+  refill_amount: number
+  refill_date: string
+  pay_period_start: string
+  pay_period_end: string
+  created_at: string
+}

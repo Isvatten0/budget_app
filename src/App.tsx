@@ -10,6 +10,7 @@ import BillsPage from './components/BillsPage'
 import GoalsPage from './components/GoalsPage'
 import AchievementsPage from './components/AchievementsPage'
 import CreditCardsPage from './components/CreditCardsPage'
+import BudgetCategoriesPage from './components/BudgetCategoriesPage'
 import Layout from './components/Layout'
 import LoadingSpinner from './components/ui/LoadingSpinner'
 
@@ -94,6 +95,13 @@ function AppRoutes() {
           <PrivateRoute>
             <Layout>
               <CreditCardsPage />
+            </Layout>
+          </PrivateRoute>
+        } />
+        <Route path="/budget-categories" element={
+          <PrivateRoute>
+            <Layout>
+              <BudgetCategoriesPage />
             </Layout>
           </PrivateRoute>
         } />
