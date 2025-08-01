@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-rose-pine-base: 25 23 36;
+    --color-rose-pine-surface: 31 29 46;
+    --color-rose-pine-overlay: 38 35 58;
+    --color-rose-pine-muted: 110 106 134;
+    --color-rose-pine-subtle: 144 140 170;
+    --color-rose-pine-text: 224 222 244;
+    --color-rose-pine-love: 235 111 146;
+    --color-rose-pine-gold: 246 193 119;
+    --color-rose-pine-rose: 235 188 186;
+    --color-rose-pine-pine: 49 116 143;
+    --color-rose-pine-foam: 156 207 216;
+    --color-rose-pine-iris: 196 167 231;
+  }
+
+  .light {
+    --color-rose-pine-base: 250 244 237;
+    --color-rose-pine-surface: 255 250 243;
+    --color-rose-pine-overlay: 242 233 225;
+    --color-rose-pine-muted: 152 147 165;
+    --color-rose-pine-subtle: 121 117 147;
+    --color-rose-pine-text: 87 82 121;
+    --color-rose-pine-love: 180 99 122;
+    --color-rose-pine-gold: 234 157 52;
+    --color-rose-pine-rose: 215 130 126;
+    --color-rose-pine-pine: 40 105 131;
+    --color-rose-pine-foam: 86 148 159;
+    --color-rose-pine-iris: 144 122 169;
+  }
+
+  body {
+    @apply bg-rose-pine-base text-rose-pine-text font-sans;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .light body {
+    @apply bg-rose-pine-dawn-base text-rose-pine-dawn-text;
+  }
+
+  /* Ensure the root element also gets theme colors */
+  #root {
+    @apply bg-rose-pine-base text-rose-pine-text;
+    min-height: 100vh;
+  }
+
+  .light #root {
+    @apply bg-rose-pine-dawn-base text-rose-pine-dawn-text;
+  }
+}
+
+@layer components {
+  .pixel-card {
+    @apply bg-rose-pine-surface border-2 border-rose-pine-overlay shadow-pixel rounded-none;
+    @apply transition-all duration-200 hover:shadow-lg hover:border-rose-pine-subtle;
+  }
+
+  .light .pixel-card {
+    @apply bg-rose-pine-dawn-surface border-rose-pine-dawn-overlay;
+    @apply hover:border-rose-pine-dawn-subtle;
+  }
+
+  .pixel-button {
+    @apply bg-rose-pine-pine text-rose-pine-text font-medium px-4 py-2;
+    @apply border-2 border-rose-pine-overlay shadow-pixel rounded-none;
+    @apply transition-all duration-200 hover:bg-rose-pine-iris hover:shadow-lg;
+    @apply active:shadow-pixel-inset active:translate-y-0.5;
+  }
+
+  .light .pixel-button {
+    @apply bg-rose-pine-dawn-pine text-rose-pine-dawn-text border-rose-pine-dawn-overlay;
+    @apply hover:bg-rose-pine-dawn-iris;
+  }
+
+  .pixel-button-secondary {
+    @apply bg-rose-pine-overlay text-rose-pine-text font-medium px-4 py-2;
+    @apply border-2 border-rose-pine-subtle shadow-pixel rounded-none;
+    @apply transition-all duration-200 hover:bg-rose-pine-subtle hover:shadow-lg;
+    @apply active:shadow-pixel-inset active:translate-y-0.5;
+  }
+
+  .light .pixel-button-secondary {
+    @apply bg-rose-pine-dawn-overlay text-rose-pine-dawn-text border-rose-pine-dawn-subtle;
+    @apply hover:bg-rose-pine-dawn-subtle;
+  }
+
+  .pixel-input {
+    @apply bg-rose-pine-overlay text-rose-pine-text border-2 border-rose-pine-subtle;
+    @apply px-3 py-2 rounded-none shadow-pixel-inset;
+    @apply focus:outline-none focus:border-rose-pine-pine focus:shadow-pixel;
+    @apply placeholder-rose-pine-muted;
+  }
+
+  .light .pixel-input {
+    @apply bg-rose-pine-dawn-overlay text-rose-pine-dawn-text border-rose-pine-dawn-subtle;
+    @apply focus:border-rose-pine-dawn-pine placeholder-rose-pine-dawn-muted;
+  }
+
+  .pixel-select {
+    @apply bg-rose-pine-overlay text-rose-pine-text border-2 border-rose-pine-subtle;
+    @apply px-3 py-2 rounded-none shadow-pixel-inset;
+    @apply focus:outline-none focus:border-rose-pine-pine focus:shadow-pixel;
+  }
+
+  .light .pixel-select {
+    @apply bg-rose-pine-dawn-overlay text-rose-pine-dawn-text border-rose-pine-dawn-subtle;
+    @apply focus:border-rose-pine-dawn-pine;
+  }
+
+  .pixel-badge {
+    @apply bg-rose-pine-iris text-rose-pine-text px-2 py-1 text-xs font-medium;
+    @apply border border-rose-pine-subtle rounded-none;
+  }
+
+  .light .pixel-badge {
+    @apply bg-rose-pine-dawn-iris text-rose-pine-dawn-text border-rose-pine-dawn-subtle;
+  }
+
+  .pixel-divider {
+    @apply border-t-2 border-rose-pine-overlay my-4;
+  }
+
+  .light .pixel-divider {
+    @apply border-rose-pine-dawn-overlay;
+  }
+
+  .pixel-animation {
+    @apply animate-pixel-fade-in;
+  }
+
+  .pixel-bounce {
+    @apply animate-pixel-bounce;
+  }
+
+  .piggy-bank {
+    @apply animate-piggy-wiggle;
+  }
+
+  .coin-spin {
+    @apply animate-coin-spin;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
