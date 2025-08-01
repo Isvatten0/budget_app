@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { useTheme } from '../contexts/ThemeContext'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Moon, Sun, LogOut, Settings, PiggyBank, TrendingUp, Calendar, Target, X } from 'lucide-react'
+import { Moon, Sun, LogOut, Settings, PiggyBank, TrendingUp, Calendar, Target, X, DollarSign } from 'lucide-react'
 import SettingsModal from './SettingsModal'
 
 interface LayoutProps {

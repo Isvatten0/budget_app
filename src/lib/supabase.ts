@@ -37,6 +37,8 @@ export interface RecurringExpense {
   frequency: 'weekly' | 'biweekly' | 'monthly' | 'custom'
   due_date: string
   custom_days?: number
+  is_paid?: boolean
+  last_paid_date?: string
 }
 
 export interface Goal {

@@ -20,7 +20,7 @@ import {
   UpcomingBill, 
   GoalProgress 
 } from '../lib/budget-utils'
-import { DollarSign, Calendar, Target, TrendingUp, AlertTriangle, CheckCircle } from 'lucide-react'
+import { DollarSign, Calendar, Target, TrendingUp, AlertTriangle, CheckCircle, Settings } from 'lucide-react'
 import BankBalanceCard from './dashboard/BankBalanceCard'
 import UpcomingBillsCard from './dashboard/UpcomingBillsCard'
 import GoalsCard from './dashboard/GoalsCard'
