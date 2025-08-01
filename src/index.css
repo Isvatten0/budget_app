@@ -33,13 +33,75 @@
     --color-rose-pine-iris: 144 122 169;
   }
 
+  /* Pixel Art Starry Background Animations */
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes sparkle {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(180deg); }
+  }
+
+  @keyframes pixel-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
   body {
     @apply bg-rose-pine-base text-rose-pine-text font-sans;
     transition: background-color 0.3s ease, color 0.3s ease;
+    background-image: 
+      /* Large stars */
+      radial-gradient(3px 3px at 50px 50px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(2px 2px at 150px 100px, rgba(255,255,255,0.6), transparent),
+      radial-gradient(2px 2px at 250px 30px, rgba(255,255,255,0.7), transparent),
+      radial-gradient(3px 3px at 350px 120px, rgba(255,255,255,0.5), transparent),
+      radial-gradient(2px 2px at 450px 60px, rgba(255,255,255,0.6), transparent),
+      /* Medium stars */
+      radial-gradient(1px 1px at 80px 80px, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 180px 150px, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 280px 90px, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1px 1px at 380px 180px, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 480px 110px, rgba(255,255,255,0.5), transparent),
+      /* Small stars */
+      radial-gradient(0.5px 0.5px at 120px 40px, rgba(255,255,255,0.3), transparent),
+      radial-gradient(0.5px 0.5px at 220px 170px, rgba(255,255,255,0.4), transparent),
+      radial-gradient(0.5px 0.5px at 320px 70px, rgba(255,255,255,0.2), transparent),
+      radial-gradient(0.5px 0.5px at 420px 140px, rgba(255,255,255,0.3), transparent),
+      radial-gradient(0.5px 0.5px at 520px 90px, rgba(255,255,255,0.4), transparent);
+    background-repeat: repeat;
+    background-size: 600px 200px;
+    animation: twinkle 4s ease-in-out infinite;
   }
 
   .light body {
     @apply bg-rose-pine-dawn-base text-rose-pine-dawn-text;
+    background-image: 
+      /* Large stars */
+      radial-gradient(3px 3px at 50px 50px, rgba(87,82,121,0.8), transparent),
+      radial-gradient(2px 2px at 150px 100px, rgba(87,82,121,0.6), transparent),
+      radial-gradient(2px 2px at 250px 30px, rgba(87,82,121,0.7), transparent),
+      radial-gradient(3px 3px at 350px 120px, rgba(87,82,121,0.5), transparent),
+      radial-gradient(2px 2px at 450px 60px, rgba(87,82,121,0.6), transparent),
+      /* Medium stars */
+      radial-gradient(1px 1px at 80px 80px, rgba(87,82,121,0.4), transparent),
+      radial-gradient(1px 1px at 180px 150px, rgba(87,82,121,0.5), transparent),
+      radial-gradient(1px 1px at 280px 90px, rgba(87,82,121,0.3), transparent),
+      radial-gradient(1px 1px at 380px 180px, rgba(87,82,121,0.4), transparent),
+      radial-gradient(1px 1px at 480px 110px, rgba(87,82,121,0.5), transparent),
+      /* Small stars */
+      radial-gradient(0.5px 0.5px at 120px 40px, rgba(87,82,121,0.3), transparent),
+      radial-gradient(0.5px 0.5px at 220px 170px, rgba(87,82,121,0.4), transparent),
+      radial-gradient(0.5px 0.5px at 320px 70px, rgba(87,82,121,0.2), transparent),
+      radial-gradient(0.5px 0.5px at 420px 140px, rgba(87,82,121,0.3), transparent),
+      radial-gradient(0.5px 0.5px at 520px 90px, rgba(87,82,121,0.4), transparent);
   }
 
   /* Ensure the root element also gets theme colors */
@@ -57,11 +119,43 @@
   .pixel-card {
     @apply bg-rose-pine-surface border-2 border-rose-pine-overlay shadow-pixel rounded-none;
     @apply transition-all duration-200 hover:shadow-lg hover:border-rose-pine-subtle;
+    @apply relative overflow-hidden;
+    background-image: 
+      linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.05) 50%, transparent 60%);
+    background-size: 200% 200%;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .pixel-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(1px 1px at 20px 20px, rgba(255,255,255,0.1), transparent),
+      radial-gradient(1px 1px at 40px 40px, rgba(255,255,255,0.05), transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .pixel-card > * {
+    position: relative;
+    z-index: 1;
   }
 
   .light .pixel-card {
     @apply bg-rose-pine-dawn-surface border-rose-pine-dawn-overlay;
     @apply hover:border-rose-pine-dawn-subtle;
+    background-image: 
+      linear-gradient(45deg, transparent 40%, rgba(87,82,121,0.05) 50%, transparent 60%);
+  }
+
+  .light .pixel-card::before {
+    background: 
+      radial-gradient(1px 1px at 20px 20px, rgba(87,82,121,0.1), transparent),
+      radial-gradient(1px 1px at 40px 40px, rgba(87,82,121,0.05), transparent);
   }
 
   .pixel-button {
@@ -69,11 +163,48 @@
     @apply border-2 border-rose-pine-overlay shadow-pixel rounded-none;
     @apply transition-all duration-200 hover:bg-rose-pine-iris hover:shadow-lg;
     @apply active:shadow-pixel-inset active:translate-y-0.5;
+    @apply relative overflow-hidden font-pixel;
+    background-image: 
+      linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+    background-size: 200% 200%;
+    animation: sparkle 3s ease-in-out infinite;
+  }
+
+  .pixel-button:hover {
+    animation: pixel-bounce 0.5s ease-in-out;
+    background-image: 
+      linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+  }
+
+  .pixel-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .pixel-button:hover::before {
+    left: 100%;
   }
 
   .light .pixel-button {
     @apply bg-rose-pine-dawn-pine text-rose-pine-dawn-text border-rose-pine-dawn-overlay;
     @apply hover:bg-rose-pine-dawn-iris;
+    background-image: 
+      linear-gradient(45deg, transparent 30%, rgba(87,82,121,0.1) 50%, transparent 70%);
+  }
+
+  .light .pixel-button:hover {
+    background-image: 
+      linear-gradient(45deg, transparent 30%, rgba(87,82,121,0.2) 50%, transparent 70%);
+  }
+
+  .light .pixel-button::before {
+    background: linear-gradient(90deg, transparent, rgba(87,82,121,0.2), transparent);
   }
 
   .pixel-button-secondary {
@@ -148,5 +279,115 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Gamification Elements */
+  .level-up {
+    animation: sparkle 0.8s ease-in-out;
+  }
+
+  .achievement-unlocked {
+    animation: pixel-bounce 0.5s ease-in-out 3;
+  }
+
+  .progress-bar {
+    @apply bg-rose-pine-overlay border border-rose-pine-subtle;
+    height: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      rgba(255,255,255,0.1) 0%, 
+      rgba(255,255,255,0.3) 50%, 
+      rgba(255,255,255,0.1) 100%);
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* Retro Game Elements */
+  .game-card {
+    @apply pixel-card;
+    @apply border-4 border-rose-pine-gold;
+    background-image: 
+      linear-gradient(45deg, transparent 40%, rgba(246,193,119,0.1) 50%, transparent 60%);
+  }
+
+  .game-card:hover {
+    @apply border-rose-pine-iris;
+    transform: scale(1.02);
+  }
+
+  .level-indicator {
+    @apply bg-rose-pine-gold text-rose-pine-base font-bold px-3 py-1;
+    @apply border-2 border-rose-pine-overlay shadow-pixel;
+    font-family: 'Courier New', monospace;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+  }
+
+  .xp-bar {
+    @apply bg-rose-pine-overlay border border-rose-pine-subtle;
+    height: 12px;
+    position: relative;
+  }
+
+  .xp-fill {
+    @apply bg-gradient-to-r from-rose-pine-gold to-rose-pine-iris;
+    height: 100%;
+    transition: width 0.5s ease-in-out;
+    background-image: 
+      linear-gradient(90deg, 
+        rgba(255,255,255,0.2) 0%, 
+        rgba(255,255,255,0.4) 50%, 
+        rgba(255,255,255,0.2) 100%);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  .light .progress-bar {
+    @apply bg-rose-pine-dawn-overlay border-rose-pine-dawn-subtle;
+  }
+
+  .light .progress-bar::before {
+    background: linear-gradient(90deg, 
+      rgba(87,82,121,0.1) 0%, 
+      rgba(87,82,121,0.3) 50%, 
+      rgba(87,82,121,0.1) 100%);
+  }
+
+  .light .game-card {
+    @apply border-rose-pine-dawn-gold;
+    background-image: 
+      linear-gradient(45deg, transparent 40%, rgba(234,157,52,0.1) 50%, transparent 60%);
+  }
+
+  .light .game-card:hover {
+    @apply border-rose-pine-dawn-iris;
+  }
+
+  .light .level-indicator {
+    @apply bg-rose-pine-dawn-gold text-rose-pine-dawn-base border-rose-pine-dawn-overlay;
+  }
+
+  .light .xp-bar {
+    @apply bg-rose-pine-dawn-overlay border-rose-pine-dawn-subtle;
+  }
+
+  .light .xp-fill {
+    @apply bg-gradient-to-r from-rose-pine-dawn-gold to-rose-pine-dawn-iris;
+    background-image: 
+      linear-gradient(90deg, 
+        rgba(87,82,121,0.2) 0%, 
+        rgba(87,82,121,0.4) 50%, 
+        rgba(87,82,121,0.2) 100%);
   }
 }

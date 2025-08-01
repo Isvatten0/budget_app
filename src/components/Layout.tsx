@@ -140,10 +140,29 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {children}
       </main>
 
-      {/* Floating piggy bank decoration */}
+      {/* Floating pixel art decorations */}
       <div className="fixed bottom-8 right-8 pointer-events-none">
         <div className="w-16 h-16 bg-rose-pine-gold border-2 border-rose-pine-overlay shadow-pixel piggy-bank flex items-center justify-center">
           <PiggyBank className="w-8 h-8 text-rose-pine-base" />
+        </div>
+      </div>
+      
+      {/* Floating coins */}
+      <div className="fixed top-20 right-12 pointer-events-none">
+        <div className="w-8 h-8 bg-rose-pine-gold border border-rose-pine-overlay shadow-pixel flex items-center justify-center coin-spin">
+          <span className="text-rose-pine-base font-bold text-xs">$</span>
+        </div>
+      </div>
+      
+      <div className="fixed top-32 right-20 pointer-events-none">
+        <div className="w-6 h-6 bg-rose-pine-iris border border-rose-pine-overlay shadow-pixel flex items-center justify-center coin-spin" style={{ animationDelay: '0.5s' }}>
+          <span className="text-rose-pine-base font-bold text-xs">★</span>
+        </div>
+      </div>
+      
+      <div className="fixed bottom-20 left-8 pointer-events-none">
+        <div className="w-10 h-10 bg-rose-pine-pine border border-rose-pine-overlay shadow-pixel flex items-center justify-center coin-spin" style={{ animationDelay: '1s' }}>
+          <span className="text-rose-pine-base font-bold text-xs">💎</span>
         </div>
       </div>
 
