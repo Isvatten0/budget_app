@@ -90,7 +90,7 @@ const BillsPage: React.FC = () => {
   }
 
   const handleDelete = async (billId: string) => {
-    if (!confirm('Are you sure you want to delete this bill?')) return
+    if (!window.confirm('Are you sure you want to delete this bill?')) return
 
     try {
       const { error } = await supabase
@@ -215,7 +215,21 @@ const BillsPage: React.FC = () => {
                   step="0.01"
                   min="0"
                   value={formData.amount}
-                  onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    // Only allow up to 2 decimal places
+                    if (value.includes('.') && value.split('.')[1]?.length > 2) {
+                      return
+                    }
+                    setFormData(prev => ({ ...prev, amount: value }))
+                  }}
+                  onBlur={(e) => {
+                    // Format to 2 decimal places on blur
+                    const value = parseFloat(e.target.value)
+                    if (!isNaN(value)) {
+                      setFormData(prev => ({ ...prev, amount: value.toFixed(2) }))
+                    }
+                  }}
                   className="pixel-input w-full"
                   placeholder="0.00"
                   required

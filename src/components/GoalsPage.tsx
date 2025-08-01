@@ -90,7 +90,7 @@ const GoalsPage: React.FC = () => {
   }
 
   const handleDelete = async (goalId: string) => {
-    if (!confirm('Are you sure you want to delete this goal?')) return
+    if (!window.confirm('Are you sure you want to delete this goal?')) return
 
     try {
       const { error } = await supabase
@@ -223,7 +223,21 @@ const GoalsPage: React.FC = () => {
                   step="0.01"
                   min="0"
                   value={formData.target_amount}
-                  onChange={(e) => setFormData(prev => ({ ...prev, target_amount: e.target.value }))}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    // Only allow up to 2 decimal places
+                    if (value.includes('.') && value.split('.')[1]?.length > 2) {
+                      return
+                    }
+                    setFormData(prev => ({ ...prev, target_amount: value }))
+                  }}
+                  onBlur={(e) => {
+                    // Format to 2 decimal places on blur
+                    const value = parseFloat(e.target.value)
+                    if (!isNaN(value)) {
+                      setFormData(prev => ({ ...prev, target_amount: value.toFixed(2) }))
+                    }
+                  }}
                   className="pixel-input w-full"
                   placeholder="0.00"
                   required
@@ -241,7 +255,21 @@ const GoalsPage: React.FC = () => {
                   step="0.01"
                   min="0"
                   value={formData.current_amount}
-                  onChange={(e) => setFormData(prev => ({ ...prev, current_amount: e.target.value }))}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    // Only allow up to 2 decimal places
+                    if (value.includes('.') && value.split('.')[1]?.length > 2) {
+                      return
+                    }
+                    setFormData(prev => ({ ...prev, current_amount: value }))
+                  }}
+                  onBlur={(e) => {
+                    // Format to 2 decimal places on blur
+                    const value = parseFloat(e.target.value)
+                    if (!isNaN(value)) {
+                      setFormData(prev => ({ ...prev, current_amount: value.toFixed(2) }))
+                    }
+                  }}
                   className="pixel-input w-full"
                   placeholder="0.00"
                 />
@@ -348,16 +376,16 @@ const GoalsPage: React.FC = () => {
                           : 'Goal completed! 🎉'
                         }
                       </span>
-                      {goal.deadline && (
-                        <span className={daysUntilDeadline && daysUntilDeadline < 30 ? 'text-rose-pine-love' : ''}>
-                          {daysUntilDeadline && daysUntilDeadline > 0 
-                            ? `${daysUntilDeadline} days left`
-                            : daysUntilDeadline === 0
-                            ? 'Due today!'
-                            : `${Math.abs(daysUntilDeadline)} days overdue`
-                          }
-                        </span>
-                      )}
+                                             {goal.deadline && daysUntilDeadline !== null && (
+                         <span className={daysUntilDeadline < 30 ? 'text-rose-pine-love' : ''}>
+                           {daysUntilDeadline > 0 
+                             ? `${daysUntilDeadline} days left`
+                             : daysUntilDeadline === 0
+                             ? 'Due today!'
+                             : `${Math.abs(daysUntilDeadline)} days overdue`
+                           }
+                         </span>
+                       )}
                     </div>
 
                     {/* Notes */}

@@ -56,15 +56,30 @@ const BankBalanceCard: React.FC<BankBalanceCardProps> = ({ currentBalance, onUpd
             <label htmlFor="balance" className="block text-rose-pine-text text-sm font-medium mb-2">
               Current Balance
             </label>
-            <input
-              id="balance"
-              type="number"
-              step="0.01"
-              value={newBalance}
-              onChange={(e) => setNewBalance(e.target.value)}
-              className="pixel-input w-full text-2xl font-bold text-center"
-              placeholder="0.00"
-            />
+                          <input
+                id="balance"
+                type="number"
+                step="0.01"
+                min="0"
+                value={newBalance}
+                onChange={(e) => {
+                  const value = e.target.value
+                  // Only allow up to 2 decimal places
+                  if (value.includes('.') && value.split('.')[1]?.length > 2) {
+                    return
+                  }
+                  setNewBalance(value)
+                }}
+                onBlur={(e) => {
+                  // Format to 2 decimal places on blur
+                  const value = parseFloat(e.target.value)
+                  if (!isNaN(value)) {
+                    setNewBalance(value.toFixed(2))
+                  }
+                }}
+                className="pixel-input w-full text-2xl font-bold text-center"
+                placeholder="0.00"
+              />
           </div>
           <div className="flex space-x-2">
             <button
