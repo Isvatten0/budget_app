@@ -61,6 +61,23 @@
   body {
     @apply bg-rose-pine-base text-rose-pine-text font-sans;
     transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Ensure arcade font is available */
+  .font-arcade {
+    font-family: 'Press Start 2P', 'Courier New', monospace !important;
+    font-size: 0.8em; /* Adjust size for better readability */
+    line-height: 1.4;
+  }
+
+  .font-pixel {
+    font-family: 'Press Start 2P', 'Courier New', monospace !important;
+    font-size: 0.8em; /* Adjust size for better readability */
+    line-height: 1.4;
+  }
+
+
     background-image: 
       /* White stars - various sizes and shapes */
       radial-gradient(4px 4px at 50px 50px, rgba(255,255,255,0.9), transparent),
@@ -240,7 +257,7 @@
   .level-indicator {
     @apply bg-rose-pine-gold text-rose-pine-base font-bold px-3 py-1;
     @apply border-2 border-rose-pine-overlay shadow-pixel;
-    font-family: 'Courier New', monospace;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
   }
 

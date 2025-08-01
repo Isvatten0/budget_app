@@ -210,6 +210,11 @@ const Dashboard: React.FC = () => {
           }}
         />
       )}
+
+      {/* Font Test - Remove this after confirming font works */}
+      <div className="fixed top-0 left-0 z-50 bg-red-500 text-white p-2 font-arcade text-xs">
+        FONT TEST: PRESS START 2P
+      </div>
       {/* Game Header */}
       <div className="game-card p-6">
         <div className="flex items-center justify-between mb-4">
@@ -221,13 +226,13 @@ const Dashboard: React.FC = () => {
               <h1 className="text-2xl font-bold text-rose-pine-text font-arcade">
                 Welcome back, {user?.email?.split('@')[0]}! 🎮
               </h1>
-              <p className="text-rose-pine-muted">
-                Ready to level up your financial skills?
+              <p className="text-rose-pine-muted font-arcade">
+                READY TO LEVEL UP?
               </p>
             </div>
           </div>
           <div className="text-right">
-            <div className="text-sm text-rose-pine-muted mb-1">XP Progress</div>
+            <div className="text-sm text-rose-pine-muted mb-1 font-arcade">XP PROGRESS</div>
             <div className="xp-bar w-32">
               <div 
                 className="xp-fill" 
@@ -237,20 +242,20 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
         
-        {/* Quest Progress */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="text-center">
-            <div className="text-2xl font-bold text-rose-pine-gold">{goals.length}</div>
-            <div className="text-sm text-rose-pine-muted">Active Quests</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-rose-pine-pine">{expenses.length}</div>
-            <div className="text-sm text-rose-pine-muted">Bills Defeated</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-rose-pine-iris">{Math.floor(currentBalance / 100)}</div>
-            <div className="text-sm text-rose-pine-muted">Gold Coins</div>
-          </div>
+                  {/* Quest Progress */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-rose-pine-gold font-arcade">{goals.length}</div>
+              <div className="text-sm text-rose-pine-muted font-arcade">ACTIVE QUESTS</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-rose-pine-pine font-arcade">{expenses.length}</div>
+              <div className="text-sm text-rose-pine-muted font-arcade">BILLS DEFEATED</div>
+            </div>
+                      <div className="text-center">
+              <div className="text-2xl font-bold text-rose-pine-iris font-arcade">{Math.floor(currentBalance / 100)}</div>
+              <div className="text-sm text-rose-pine-muted font-arcade">GOLD COINS</div>
+            </div>
         </div>
       </div>
 
@@ -290,7 +295,7 @@ const Dashboard: React.FC = () => {
           >
             <DollarSign className="w-6 h-6 mb-2 text-rose-pine-gold" />
             <h3 className="font-semibold text-rose-pine-text font-arcade">💰 COLLECT GOLD</h3>
-            <p className="text-sm text-rose-pine-muted">Log your income & rewards</p>
+            <p className="text-sm text-rose-pine-muted font-arcade">LOG INCOME & REWARDS</p>
           </button>
           
           <button 
@@ -299,7 +304,7 @@ const Dashboard: React.FC = () => {
           >
             <Calendar className="w-6 h-6 mb-2 text-rose-pine-pine" />
             <h3 className="font-semibold text-rose-pine-text font-arcade">⚔️ BATTLE BILLS</h3>
-            <p className="text-sm text-rose-pine-muted">Defeat recurring expenses</p>
+            <p className="text-sm text-rose-pine-muted font-arcade">DEFEAT RECURRING EXPENSES</p>
           </button>
           
           <button 
@@ -308,7 +313,7 @@ const Dashboard: React.FC = () => {
           >
             <Target className="w-6 h-6 mb-2 text-rose-pine-iris" />
             <h3 className="font-semibold text-rose-pine-text font-arcade">🏆 EPIC QUESTS</h3>
-            <p className="text-sm text-rose-pine-muted">Complete savings missions</p>
+            <p className="text-sm text-rose-pine-muted font-arcade">COMPLETE SAVINGS MISSIONS</p>
           </button>
           
           <button 
@@ -317,7 +322,7 @@ const Dashboard: React.FC = () => {
           >
             <Settings className="w-6 h-6 mb-2 text-rose-pine-muted" />
             <h3 className="font-semibold text-rose-pine-text font-arcade">⚙️ CHARACTER</h3>
-            <p className="text-sm text-rose-pine-muted">Customize your settings</p>
+            <p className="text-sm text-rose-pine-muted font-arcade">CUSTOMIZE SETTINGS</p>
           </button>
         </div>
       </div>
