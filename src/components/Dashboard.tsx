@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { 
   calculateBudgetForecast, 
@@ -28,6 +29,7 @@ import LoadingSpinner from './ui/LoadingSpinner'
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth()
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   
@@ -216,22 +218,31 @@ const Dashboard: React.FC = () => {
       <div className="pixel-card p-6">
         <h2 className="text-xl font-bold text-rose-pine-text mb-4">Quick Actions</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <button className="pixel-button-secondary p-4 text-left">
-            <DollarSign className="w-6 h-6 mb-2 text-rose-pine-gold" />
-            <h3 className="font-semibold text-rose-pine-text">Add Transaction</h3>
-            <p className="text-sm text-rose-pine-muted">Record income or expense</p>
-          </button>
-          
-          <button className="pixel-button-secondary p-4 text-left">
+          <button 
+            onClick={() => navigate('/bills')}
+            className="pixel-button-secondary p-4 text-left hover:bg-rose-pine-overlay transition-colors"
+          >
             <Calendar className="w-6 h-6 mb-2 text-rose-pine-pine" />
             <h3 className="font-semibold text-rose-pine-text">Add Bill</h3>
             <p className="text-sm text-rose-pine-muted">Set up recurring expense</p>
           </button>
           
-          <button className="pixel-button-secondary p-4 text-left">
+          <button 
+            onClick={() => navigate('/goals')}
+            className="pixel-button-secondary p-4 text-left hover:bg-rose-pine-overlay transition-colors"
+          >
             <Target className="w-6 h-6 mb-2 text-rose-pine-iris" />
             <h3 className="font-semibold text-rose-pine-text">Create Goal</h3>
             <p className="text-sm text-rose-pine-muted">Set savings target</p>
+          </button>
+          
+          <button 
+            onClick={() => navigate('/dashboard')}
+            className="pixel-button-secondary p-4 text-left hover:bg-rose-pine-overlay transition-colors"
+          >
+            <DollarSign className="w-6 h-6 mb-2 text-rose-pine-gold" />
+            <h3 className="font-semibold text-rose-pine-text">Settings</h3>
+            <p className="text-sm text-rose-pine-muted">Configure pay frequency</p>
           </button>
         </div>
       </div>

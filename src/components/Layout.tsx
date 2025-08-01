@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { useTheme } from '../contexts/ThemeContext'
-import { Moon, Sun, LogOut, Settings, PiggyBank, TrendingUp, Calendar, Target } from 'lucide-react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { Moon, Sun, LogOut, Settings, PiggyBank, TrendingUp, Calendar, Target, X } from 'lucide-react'
+import SettingsModal from './SettingsModal'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -10,10 +12,25 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { signOut, user } = useAuth()
   const { theme, toggleTheme } = useTheme()
+  const location = useLocation()
+  const navigate = useNavigate()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
   const handleSignOut = async () => {
     await signOut()
+  }
+
+  const handleTabClick = (tab: string) => {
+    navigate(`/${tab}`)
+  }
+
+  const getActiveTab = () => {
+    const path = location.pathname
+    if (path === '/dashboard' || path === '/') return 'dashboard'
+    if (path === '/bills') return 'bills'
+    if (path === '/goals') return 'goals'
+    return 'dashboard'
   }
 
   return (
@@ -32,15 +49,30 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* Navigation */}
             <nav className="hidden md:flex items-center space-x-4">
-              <button className="pixel-button-secondary px-3 py-2 text-sm">
+              <button 
+                onClick={() => handleTabClick('dashboard')}
+                className={`pixel-button-secondary px-3 py-2 text-sm transition-all ${
+                  getActiveTab() === 'dashboard' ? 'bg-rose-pine-pine text-rose-pine-text' : ''
+                }`}
+              >
                 <TrendingUp className="w-4 h-4 mr-2" />
                 Dashboard
               </button>
-              <button className="pixel-button-secondary px-3 py-2 text-sm">
+              <button 
+                onClick={() => handleTabClick('bills')}
+                className={`pixel-button-secondary px-3 py-2 text-sm transition-all ${
+                  getActiveTab() === 'bills' ? 'bg-rose-pine-pine text-rose-pine-text' : ''
+                }`}
+              >
                 <Calendar className="w-4 h-4 mr-2" />
                 Bills
               </button>
-              <button className="pixel-button-secondary px-3 py-2 text-sm">
+              <button 
+                onClick={() => handleTabClick('goals')}
+                className={`pixel-button-secondary px-3 py-2 text-sm transition-all ${
+                  getActiveTab() === 'goals' ? 'bg-rose-pine-pine text-rose-pine-text' : ''
+                }`}
+              >
                 <Target className="w-4 h-4 mr-2" />
                 Goals
               </button>
@@ -58,7 +90,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               </button>
 
               {/* Settings */}
-              <button className="pixel-button-secondary p-2" aria-label="Settings">
+              <button 
+                onClick={() => setIsSettingsOpen(true)}
+                className="pixel-button-secondary p-2" 
+                aria-label="Settings"
+              >
                 <Settings size={20} />
               </button>
 
@@ -100,6 +136,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <PiggyBank className="w-8 h-8 text-rose-pine-base" />
         </div>
       </div>
+
+      {/* Settings Modal */}
+      {isSettingsOpen && (
+        <SettingsModal onClose={() => setIsSettingsOpen(false)} />
+      )}
 
       {/* Mobile menu overlay */}
       {isMenuOpen && (

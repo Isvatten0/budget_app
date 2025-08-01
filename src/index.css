@@ -41,6 +41,16 @@
   .light body {
     @apply bg-rose-pine-dawn-base text-rose-pine-dawn-text;
   }
+
+  /* Ensure the root element also gets theme colors */
+  #root {
+    @apply bg-rose-pine-base text-rose-pine-text;
+    min-height: 100vh;
+  }
+
+  .light #root {
+    @apply bg-rose-pine-dawn-base text-rose-pine-dawn-text;
+  }
 }
 
 @layer components {

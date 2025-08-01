@@ -5,6 +5,8 @@ import { ThemeProvider } from './contexts/ThemeContext'
 import Login from './components/auth/Login'
 import SignUp from './components/auth/SignUp'
 import Dashboard from './components/Dashboard'
+import BillsPage from './components/BillsPage'
+import GoalsPage from './components/GoalsPage'
 import Layout from './components/Layout'
 import LoadingSpinner from './components/ui/LoadingSpinner'
 
@@ -54,6 +56,20 @@ function AppRoutes() {
           <PrivateRoute>
             <Layout>
               <Dashboard />
+            </Layout>
+          </PrivateRoute>
+        } />
+        <Route path="/bills" element={
+          <PrivateRoute>
+            <Layout>
+              <BillsPage />
+            </Layout>
+          </PrivateRoute>
+        } />
+        <Route path="/goals" element={
+          <PrivateRoute>
+            <Layout>
+              <GoalsPage />
             </Layout>
           </PrivateRoute>
         } />
