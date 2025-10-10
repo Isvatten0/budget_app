@@ -1,99 +1,54 @@
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import { AuthProvider, useAuth } from './contexts/AuthContext'
-import { ThemeProvider } from './contexts/ThemeContext'
-import Login from './components/auth/Login'
-import SignUp from './components/auth/SignUp'
-import Dashboard from './components/Dashboard'
-import IncomePage from './components/IncomePage'
-import BillsPage from './components/BillsPage'
-import GoalsPage from './components/GoalsPage'
-import Layout from './components/Layout'
-import LoadingSpinner from './components/ui/LoadingSpinner'
-
-function PrivateRoute({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth()
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-rose-pine-base flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    )
-  }
-
-  return user ? <>{children}</> : <Navigate to="/login" replace />
-}
-
-function PublicRoute({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth()
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-rose-pine-base flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    )
-  }
-
-  return user ? <Navigate to="/dashboard" replace /> : <>{children}</>
-}
-
-function AppRoutes() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={
-          <PublicRoute>
-            <Login />
-          </PublicRoute>
-        } />
-        <Route path="/signup" element={
-          <PublicRoute>
-            <SignUp />
-          </PublicRoute>
-        } />
-        <Route path="/dashboard" element={
-          <PrivateRoute>
-            <Layout>
-              <Dashboard />
-            </Layout>
-          </PrivateRoute>
-        } />
-        <Route path="/income" element={
-          <PrivateRoute>
-            <Layout>
-              <IncomePage />
-            </Layout>
-          </PrivateRoute>
-        } />
-        <Route path="/bills" element={
-          <PrivateRoute>
-            <Layout>
-              <BillsPage />
-            </Layout>
-          </PrivateRoute>
-        } />
-        <Route path="/goals" element={
-          <PrivateRoute>
-            <Layout>
-              <GoalsPage />
-            </Layout>
-          </PrivateRoute>
-        } />
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-      </Routes>
-    </Router>
-  )
-}
+import React, { useState } from 'react'
+import HuntingMap from './components/HuntingMap'
+import ConditionsPanel from './components/ConditionsPanel'
+import { HuntingConditions, AnalysisResults } from './types/hunting'
+import { analyzeHuntingConditions } from './modules/movementEngine'
+import './index.css'
 
 function App() {
+  const [conditions, setConditions] = useState<HuntingConditions>({
+    windDirection: 'NW',
+    season: 'Early Season',
+    timeOfDay: 'Evening',
+    foodSources: ['Acorn Flat'],
+    weatherModifier: 'Stable high pressure'
+  })
+
+  const [analysisResults, setAnalysisResults] = useState<AnalysisResults | null>(null)
+  const [showLegend, setShowLegend] = useState(true)
+
+  const handleAnalyze = () => {
+    // For now, we'll simulate map bounds - in real implementation this would come from the map
+    const mockMapBounds = {
+      north: 40.7589,
+      south: 40.7489,
+      east: -73.9741,
+      west: -73.9841
+    }
+    
+    const results = analyzeHuntingConditions(conditions, mockMapBounds)
+    setAnalysisResults(results)
+  }
+
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
-    </ThemeProvider>
+    <div className="h-screen bg-slate-900 flex">
+      {/* Conditions Panel */}
+      <ConditionsPanel
+        conditions={conditions}
+        onConditionsChange={setConditions}
+        onAnalyze={handleAnalyze}
+        showLegend={showLegend}
+        onToggleLegend={() => setShowLegend(!showLegend)}
+      />
+
+      {/* Main Map Area */}
+      <div className="flex-1 relative">
+        <HuntingMap
+          analysisResults={analysisResults}
+          showLegend={showLegend}
+        />
+      </div>
+    </div>
   )
 }
 
